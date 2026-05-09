@@ -69,7 +69,7 @@ public class TaskService {
         if(request.getPriority() != null || request.getPriority() != " ") task.setPriority(request.getPriority());
          
          
-        task.setUpdatedAt(LocalDateTime.now());
+        task.setUpdatedAt(LocalDateTime.now(ZoneId.of("Asia/Kolkata")));
 
         return taskRepository.save(task);
     }
