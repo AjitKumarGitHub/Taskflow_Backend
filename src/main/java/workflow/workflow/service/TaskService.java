@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import java.time.ZoneId;
+
 @Service
 @RequiredArgsConstructor
 public class TaskService {
@@ -31,8 +33,8 @@ public class TaskService {
                 .status(request.getStatus())
                 .priority(request.getPriority())
                 .userId(user.getId())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now(ZoneId.of("Asia/Kolkata")))
+                .updatedAt(LocalDateTime.now(ZoneId.of("Asia/Kolkata")))
                 .build();
 
         return taskRepository.save(task);
