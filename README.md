@@ -12,7 +12,20 @@ This project demonstrates strong backend engineering principles including **secu
 [TaskFlow Frontend Live Demo](https://taskflow-frontend-five-sage.vercel.app/)
 
 ---
+## 🌍 Live Deployment
 
+### Backend API (AWS EC2)
+
+Hosted on AWS EC2 using Ubuntu Server + Spring Boot.
+
+🔗 Base URL:  
+http://51.20.44.54:8080
+
+### Sample API Endpoint
+
+#### Register User
+```http
+POST http://51.20.44.54:8080/api/v1/auth/register
 ##  Key Highlights
 
 -  Secure JWT Authentication
