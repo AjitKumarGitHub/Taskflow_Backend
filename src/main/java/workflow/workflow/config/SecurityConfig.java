@@ -36,40 +36,29 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
 
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/api/v1/auth/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/v3/api-docs/**"
+                ).permitAll()
 
-                .csrf(csrf -> csrf.disable())
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
 
-                        .requestMatchers(
-                                "/api/v1/auth/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/v3/api-docs/**"
-                        ).permitAll()
+                .anyRequest().authenticated()
+            )
 
-                        .requestMatchers(HttpMethod.OPTIONS, "/**")
-                        .permitAll()
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
 
-                        .requestMatchers("/api/v1/admin/**")
-                        .hasRole("ADMIN")
-
-                        .anyRequest()
-                        .authenticated()
-                )
-
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS
-                        )
-                )
-
-                .addFilterBefore(
-                        jwtAuthFilter,
-                        UsernamePasswordAuthenticationFilter.class
-                );
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -80,7 +69,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-                List.of("http://localhost:3000")
+                List.of("https://taskflow-frontend-five-sage.vercel.app")
         );
 
         configuration.setAllowedMethods(
@@ -88,14 +77,17 @@ public class SecurityConfig {
         );
 
         configuration.setAllowedHeaders(
-                List.of("*")
+                List.of("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With")
+        );
+
+        configuration.setExposedHeaders(
+                List.of("Authorization")
         );
 
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
 
         return source;
