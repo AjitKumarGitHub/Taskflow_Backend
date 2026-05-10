@@ -26,6 +26,22 @@ http://51.20.44.54:8080
 #### Register User
 http
 POST http://51.20.44.54:8080/api/v1/auth/register
+
+☁️ AWS Deployment Stack
+AWS EC2 (Ubuntu Server)
+Java 17
+Spring Boot
+MongoDB Atlas
+Maven
+Linux SSH Deployment
+Screen Process Manager
+🚀 Deployment Highlights
+Configured and deployed Spring Boot backend on AWS EC2
+Connected MongoDB Atlas cloud database
+Managed environment variables securely
+Configured Linux server using SSH
+Used screen for persistent background execution
+Exposed REST APIs publicly over cloud infrastructure
 ##  Key Highlights
 
 -  Secure JWT Authentication
