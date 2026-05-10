@@ -24,7 +24,7 @@ http://51.20.44.54:8080
 ### Sample API Endpoint
 
 #### Register User
-```http
+http
 POST http://51.20.44.54:8080/api/v1/auth/register
 ##  Key Highlights
 
