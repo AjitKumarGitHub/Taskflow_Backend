@@ -1,4 +1,4 @@
-# 🚀 TaskFlow – Scalable Backend System with Authentication & RBAC
+#  TaskFlow – Scalable Backend System with Authentication & RBAC
 
 A production-structured full-stack backend system built using **Spring Boot, MongoDB, JWT Authentication**, and a modern frontend built with **Next.js + Tailwind CSS**.
 
@@ -9,25 +9,25 @@ This project demonstrates strong backend engineering principles including **secu
 ## 🌐 Live Demo
 
 🔗 Frontend Application:  
-[TaskFlow Frontend Live Demo](https://taskflow-frontend-five-sage.vercel.app/?utm_source=chatgpt.com)
+[TaskFlow Frontend Live Demo](https://taskflow-frontend-five-sage.vercel.app/)
 
 ---
 
-## 🧠 Key Highlights
+##  Key Highlights
 
-- 🔐 Secure JWT Authentication
-- 👮 Role-Based Access Control (USER / ADMIN)
-- 📦 Modular and Scalable Spring Boot Architecture
-- 🗄️ MongoDB Atlas Integration
-- ⚙️ RESTful API Design (Best Practices)
-- 📄 Swagger API Documentation
-- 🎯 Full CRUD Operations
-- 💻 Responsive Frontend (Next.js + Tailwind)
-- ☁️ Production-ready Deployment (Vercel + Atlas)
+-  Secure JWT Authentication
+-  Role-Based Access Control (USER / ADMIN)
+-  Modular and Scalable Spring Boot Architecture
+-  MongoDB Atlas Integration
+-  RESTful API Design  
+-  Swagger API Documentation
+-  Full CRUD Operations
+-  Responsive Frontend (Next.js + Tailwind)
+-  Production-ready Deployment (Vercel + Atlas)
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 Frontend (Next.js)
 ↓
 REST APIs (Spring Boot)
@@ -41,7 +41,7 @@ MongoDB Atlas (Database)
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 - Java 17
@@ -66,26 +66,60 @@ MongoDB Atlas (Database)
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ### Backend
-workflow-backend/
-├── controller
-├── service
-├── repository
-├── security (JWT Filter, Config)
-├── pojo
-├── entity
-├── exception
-├── config
-└── WorkflowApplication.java
+ taskflow-backend/
+├── src/main/java/com/taskflow
+│   ├── TaskflowApplication.java
+│   ├── config
+│   │   ├── SwaggerConfig.java
+│   │   └── SecurityConfig.java
+│   ├── controller
+│   │   ├── AuthController.java
+│   │   ├── TaskController.java
+│   │   └── AdminController.java
+│   ├── pojo
+│   │     |
+│   │     ├── LoginRequest.java
+│   │     ├── RegisterRequest.java
+│   │     └── TaskRequest.java
+│   │   
+│   │     ├── ApiResponse.java
+│   │     ├── AuthResponse.java
+│   │     └── TaskResponse.java
+│   ├── entity
+│   │   ├── Role.java
+│   │   ├── User.java
+│   │   └── Task.java
+│   ├── exception
+│   │   ├── GlobalExceptionHandler.java
+│   │   ├── ResourceNotFoundException.java
+│   │   └── UnauthorizedException.java
+│   ├── repository
+│   │   ├── UserRepository.java
+│   │   └── TaskRepository.java
+│   ├── security
+│   │   ├── JwtAuthFilter.java
+│   │   ├── JwtService.java
+│   │   └── CustomUserDetailsService.java
+│   ├── service
+│   │   ├── AuthService.java
+│   │   ├── TaskService.java
+│   │   └── AdminService.java
+│   └── util
+│       └── MapperUtil.java
+├── src/main/resources
+│   └── application.yml
+├── pom.xml
+└── README.md
 
 ---
 
 
 ---
 
-## 🔐 Authentication Flow
+##  Authentication Flow
 
 1. User registers → password hashed using BCrypt  
 2. Login generates JWT token  
@@ -96,9 +130,9 @@ workflow-backend/
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
-### 🔑 Auth APIs
+###  Auth APIs
 
 #### Register
 ```http
@@ -116,10 +150,13 @@ or for user register
   "password": "123456",
   "role": "USER"
 }
-
+## Authorization Rules
+Role	Access Level
+USER	Manage own tasks
+ADMIN	Full system access
 # 📡 API Endpoints
 
-## 🔐 Authentication APIs
+##  Authentication APIs
 
 | Method | Endpoint | Description | Access |
 |--------|-----------|-------------|---------|
@@ -128,19 +165,36 @@ or for user register
 
 ---
 
-## 📋 Task APIs
-
-| Method | Endpoint | Description | Access |
-|--------|-----------|-------------|---------|
-| POST | `/api/v1/tasks` | Create new task | USER / ADMIN |
-| GET | `/api/v1/tasks` | Get all tasks | USER / ADMIN |
-| GET | `/api/v1/tasks/{id}` | Get task by ID | USER / ADMIN |
-| PUT | `/api/v1/tasks/{id}` | Update task | USER / ADMIN |
-| DELETE | `/api/v1/tasks/{id}` | Delete task | ADMIN |
-
+TaskFlow Backend API
+│
+├── Auth APIs
+│   ├── Register User
+│   ├── Register Admin
+│   ├── Login User
+│   └── Login Admin
+│
+├── User Task APIs
+│   ├── Create Task
+│   ├── Get All Tasks
+│   ├── Get Task By ID
+│   ├── Update Task
+│   └── Delete Task
+│
+└── Admin APIs
+    ├── Get All Users (if available)
+    ├── Delete Any Task (if admin-only)
+    └── Admin Dashboard (if available)
 ---
 
-# 🔑 Authorization Header
+#  Authorization Header
 
 ```http
 Authorization: Bearer YOUR_JWT_TOKEN
+
+## Note
+I deployed backend part on render so hitting any first API will take 40-50 sec , then will take very less Time (free render plan)
+
+## Greeting
+## 🤝 Opportunity
+
+I enjoyed building this project and would be grateful for the opportunity to contribute as a Backend Developer Intern. Thank you for reviewing my assignment.
